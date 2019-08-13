@@ -19,11 +19,20 @@ export const todoListReducer = (state, action) => {
             };
             console.log(newTodo)
             return {
-                ...state, newTodo  
+                ...state.todos, newTodo  
             };
-        // case 'CLEAR_COMPLETED':
+        //case 'CLEAR_COMPLETED':
 
-        // case 'TOGGLE_COMPLETED':
+        // case 'TOGGLE_TASK':
+        //     return {
+        //         ...state, 
+        //         todos: state.todos.map(todo => {
+        //             if (todo.id === action.payload) {
+        //                 completed: !todo.completed
+        //             };
+        //             }
+        //         )
+        //     }
 
         default:
             return state;
