@@ -1,34 +1,31 @@
-import React, { useState, useReducer } from 'react';
-
-import { initialState, todoListReducer } from '../reducers/todoListReducer';
+import React, { useState } from 'react';
 
 
-
-
-const TodoForm = () => {
-    const [newTask, setNewTask] = useState();
-
-    const [state, dispatch] = useReducer(todoListReducer, initialState);
-    console.log(state);
-
-    const handleChanges = event => {
-        setNewTask(event.target.value);
+const TodoForm = ({ addTask, clearCompleted }) => {
+    const [task, setTask] = useState('');
+    const handleChange = event => setTask(event.target.value);
+    const handleSubmit = event => {
+        event.preventDefault();
+        addTask(task);
+        setTask("");
     };
-
+    const handleClear = event => {
+        event.preventDefault();
+        clearCompleted();
+    };
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <input
                 className="todo-input"
                 type="text"
                 name="newTodo"
-                onChange={handleChanges}
+                onChange={handleChange}
             />
-            <button
-                onClick={() => dispatch({ type: 'ADD_TASK', payload: newTask })}
-                >
-                Add Task
+            <button type='submit'>
+                Add Todo
             </button>
-        </div>
+            <button>Clear Completed</button>
+        </form>
     );
 };
 
